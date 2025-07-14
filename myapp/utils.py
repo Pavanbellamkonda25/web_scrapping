@@ -21,7 +21,7 @@ def get_harmful_content_trends():
     counts = [item["count"] for item in data]
 
     plt.figure(figsize=(6, 4))
-    plt.bar(types, counts, color="red")
+    plt.bar(types, counts, color="pink")
     plt.xlabel("Content Type")
     plt.ylabel("Count")
     plt.title("Harmful Content Detection Trends")
