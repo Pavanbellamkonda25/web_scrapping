@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Web Scraping & Text Analysis System</title>
+    <!-- Load static files -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/settings.css' %}">
+</head>
+
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">WebScrape</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'scraping' %}">Scraping</a></li>
+            <li><a href="{% url 'analysis' %}">Analysis</a></li>
+            <li><a href="{% url 'reports' %}">Reports</a></li>
+            <li><a href="{% url 'settings' %}" class="active">Settings</a></li>
+            <li><a href="#">Help</a></li>
+        </ul>
+        <div class="profile">
+            <a href="#">Profile</a>
+            <a href="#">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <h2>Settings</h2>
+
+        <!-- Account Settings -->
+        <div class="widget account-settings">
+            <h3>Account Settings</h3>
+            <form id="account-settings-form">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" value="current_username" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="current_email@example.com" required>
+
+                <label for="password">Change Password:</label>
+                <input type="password" id="password" name="password" placeholder="New password">
+
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+
+        <!-- System Settings -->
+        <div class="widget system-settings">
+            <h3>System Settings</h3>
+            <form id="system-settings-form">
+                <label for="scraping-frequency">Scraping Frequency:</label>
+                <select id="scraping-frequency" name="scraping-frequency">
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                </select>
+
+                <label for="rate-limit">Rate Limit (requests per minute):</label>
+                <input type="number" id="rate-limit" name="rate-limit" min="1" max="60" value="10">
+
+                <button type="submit">Save Settings</button>
+            </form>
+        </div>
+
+        <!-- Notification Settings -->
+        <div class="widget notification-settings">
+            <h3>Notification Settings</h3>
+            <form id="notification-settings-form">
+                <label>
+                    <input type="checkbox" name="notify-email" checked>
+                    Email Notifications
+                </label>
+
+                <label>
+                    <input type="checkbox" name="notify-sms">
+                    SMS Notifications
+                </label>
+
+                <button type="submit">Save Notification Settings</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

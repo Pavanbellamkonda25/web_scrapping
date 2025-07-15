@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scraping - Web Scraping & Text Analysis System</title>
+
+    <!-- Load static files -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/scraping.css' %}">
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+    <div class="main-content">
+        <h2>Scraping Tasks</h2>
+
+        <!-- Start New Scraping Task -->
+        <div class="widget new-task">
+            <h3>Start New Scraping Task</h3>
+            <form id="scraping-form" method="post" action="{% url 'start_scraping_task' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <!-- Single URL input is now optional -->
+                <label for="website-url">Website URL (Optional):</label>
+                <input type="text" id="website-url" name="website_url" placeholder="https://example.com">
+
+                <label for="scraping-depth">Scraping Depth:</label>
+                <select id="scraping-depth" name="scraping_depth">
+                    <option value="homepage">Homepage Only</option>
+                    <option value="all-pages">All Pages</option>
+                </select>
+
+                <label for="keywords">Keywords to Monitor (optional):</label>
+                <input type="text" id="keywords" name="keywords" placeholder="e.g., hate speech, violence">
+
+                <label for="url_file">Upload URL List (CSV):</label>
+                <input type="file" id="url_file" name="url_file" accept=".csv">
+
+                <button type="submit">Start Task</button>
+            </form>
+
+        </div>
+
+    </div>
+</body>
+
+</html>

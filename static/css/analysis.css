@@ -1,0 +1,68 @@
+/* Analysis Section Styles */
+.upload-data,
+.analysis-options,
+.analysis-results,
+.save-load-profiles {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.upload-data h3,
+.analysis-options h3,
+.analysis-results h3,
+.save-load-profiles h3 {
+    margin-top: 0;
+}
+
+#upload-form,
+#analysis-options-form,
+#profile-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#upload-form label,
+#analysis-options-form label,
+#profile-form label {
+    margin-bottom: 5px;
+}
+
+#upload-form input,
+#upload-form select,
+#analysis-options-form input[type="checkbox"],
+#profile-form input,
+#profile-form select {
+    margin-bottom: 15px;
+}
+
+#upload-form button,
+#analysis-options-form button,
+#profile-form button,
+#load-button {
+    background-color: #004080;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+#upload-form button:hover,
+#analysis-options-form button:hover,
+#profile-form button:hover,
+#load-button:hover {
+    background-color: #0059b3;
+}
+
+.analysis-results .results-summary ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.analysis-results .results-summary ul li {
+    margin-bottom: 10px;
+}

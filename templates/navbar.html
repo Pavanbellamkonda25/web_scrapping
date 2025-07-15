@@ -1,0 +1,29 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebScrape - Navbar</title>
+    {% load static %}
+   
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+
+<nav class="navbar">
+    <div class="logo">WebScrape</div>
+    <!-- Top Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo"></div>
+        <ul class="nav-links">
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'start_scraping_task' %}">Scraping</a></li>
+            <li><a href="{% url 'completed_scraping_tasks' %}">Completed Tasks</a></li>
+            <li><a href="{% url 'analysis' %}">Analysis</a></li>
+            <li><a href="{% url 'reports' %}">Reports</a></li>
+           
+            <li><a href="{% url 'help' %}">Help</a></li>
+        </ul>
+        <div class="profile">
+            <a href="{% url 'profile' %}">Profile</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+    </nav>
+</nav>

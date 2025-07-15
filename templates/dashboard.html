@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Web Scraping & Text Analysis</title>
+    <!-- Load static files -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">WebScrape</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'start_scraping_task' %}">Scraping</a></li>
+            <li><a href="{% url 'completed_scraping_tasks' %}">Completed Tasks</a></li>
+            <li><a href="{% url 'analysis' %}">Analysis</a></li>
+            <li><a href="{% url 'reports' %}">Reports</a></li>
+           
+            <li><a href="{% url 'help' %}">Help</a></li>
+        </ul>
+        <div class="profile">
+            <a href="{% url 'profile' %}">Profile</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <!-- Overview Widgets -->
+        <div class="dashboard-grid">
+            <!-- Scraping Status Widget -->
+            <div class="widget">
+                <h3>Scraping Status</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: {{ scraping_progress }}%;">{{ scraping_progress }}%</div>
+                </div>
+                <p>{{ total_websites }} websites being scraped, {{ pages_processed }} pages processed.</p>
+            </div>
+
+            <!-- Recent Harmful Content Widget -->
+            <div class="widget">
+                <h3>Recent Harmful Content</h3>
+                <ul>
+                    {% for content in harmful_content %}
+                    <li>Website: {{ content.website }} - {{ content.issue }}</li>
+                    {% empty %}
+                    <li>No harmful content detected recently.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- System Health Widget -->
+            <div class="widget">
+                <h3>System Health</h3>
+                <p>CPU Usage: {{ system_health.cpu_usage }}%</p>
+                <p>Memory Usage: {{ system_health.memory_usage }}%</p>
+                <p>Storage: {{ system_health.storage_usage }}% used</p>
+            </div>
+
+            <!-- Quick Actions Widget -->
+            <div class="widget">
+                <h3>Quick Actions</h3>
+                <a href="{% url 'start_scraping_task' %}"><button>New Scraping Task</button></a>
+                <a href="{% url 'reports' %}"><button>View Reports</button></a>
+                <a href="{% url 'perform_analysis' %}"><button>Start Analysis</button></a>
+            </div>
+        </div>
+
+        <!-- Data Visualization Widgets -->
+        <div class="dashboard-grid">
+            <div class="widget">
+                <h3>Harmful Content Detection Trends</h3>
+                {% comment %} <img src="{% static 'images/chart-placeholder.png' %}" alt="Chart showing harmful content trends"> {% endcomment %}
+                <img src="{% url 'generate_plot' %}" alt="Content Issue Distribution Chart">
+
+            </div>
+
+            <div class="widget">
+                <h3>Scraping Task Performance</h3>
+                <img src="/scraping-performance-chart/" alt="Scraping Task Performance Chart">
+
+                {% comment %} <img src="{% url 'scraping_performance_chart' %}" alt="Scraping Task Performance Chart"> {% endcomment %}
+            </div>
+        </div>
+
+        <!-- Activity Log -->
+        <div class="widget activity-log">
+            <h3>Recent Activity</h3>
+            <ul>
+                {% for activity in recent_activities %}
+                <li>{{ activity.description }}</li>
+                {% empty %}
+                <li>No recent activities logged.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 WebScrape System. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

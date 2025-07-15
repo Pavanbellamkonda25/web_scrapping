@@ -1,0 +1,49 @@
+/* Custom styling for analysis results page */
+body {
+    background-color: #f5f5f5;
+    font-family: 'Arial', sans-serif;
+}
+
+.card {
+    margin-top: 40px;
+    border: 1px solid #eaeaea;
+}
+
+.card-header {
+    padding: 15px;
+}
+
+.card-body {
+    padding: 30px;
+}
+
+h2,
+h3 {
+    font-weight: bold;
+}
+
+.list-group-item {
+    border: none;
+    padding: 10px 15px;
+}
+
+.progress {
+    background-color: #e9ecef;
+    border-radius: 5px;
+}
+
+.progress-bar {
+    background-color: #4caf50;
+}
+
+.container {
+    max-width: 800px;
+}
+
+@media (max-width: 576px) {
+
+    .card-header,
+    .card-body {
+        padding: 20px;
+    }
+}

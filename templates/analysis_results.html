@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results</title>
+    <!-- Load static files -->
+    {% load static %}
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/analysis_result.css' %}">
+</head>
+
+<body>
+     {% include 'navbar.html' %}
+    <div class="container mt-5">
+        <div class="card shadow-sm">
+            <div class="card-header text-center bg-primary text-white">
+                <h2>Analysis Results</h2>
+            </div>
+            <div class="card-body">
+                <!-- Task Details -->
+                <div class="mb-4">
+                    <h3 class="text-primary">Task Details</h3>
+                    <p><strong>Task ID:</strong> {{ task.id }}</p>
+                    <p><strong>Task Type:</strong> {{ task.task_type }}</p>
+                    <p><strong>Status:</strong> <span class="badge bg-info">{{ task.status }}</span></p>
+                </div>
+
+                <!-- Results Summary -->
+                <div>
+                    <h3 class="text-primary">Results Summary</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Top Keywords:</strong> {{ results.keywords|default:"N/A" }}</li>
+                        <li class="list-group-item"><strong>Overall Sentiment:</strong> {{ results.sentiment|default:"N/A" }}</li>
+                        <li class="list-group-item"><strong>Top Categories:</strong> {{ results.categories|default:"N/A" }}</li>
+                        <li class="list-group-item"><strong>Named Entities:</strong> {{ results.entities|default:"N/A" }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS (optional if needed for interactive components) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

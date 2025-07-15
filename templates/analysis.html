@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis - Web Scraping & Text Analysis System</title>
+    <!-- Load static files -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/analysis.css' %}">
+</head>
+
+<body>
+     {% include 'navbar.html' %}
+    <div class="main-content">
+        <h2>Text Analysis</h2>
+
+        <!-- Upload Data for Analysis -->
+        <div class="widget upload-data">
+            <h3>Upload Data for Analysis</h3>
+            <form id="upload-form" enctype="multipart/form-data" method="post" action="{% url 'start_analysis' %}">
+                {% csrf_token %}
+                <label for="data-upload">Upload File:</label>
+                <input type="file" id="data-upload" name="data-upload" accept=".csv,.json">
+
+                <label for="scraped-data">Or Choose Scraped Data:</label>
+                <select id="scraped-data" name="scraped-data">
+                    <option value="none">Select a previously scraped dataset</option>
+                    {% for dataset in scraped_datasets %}
+                    <option value="{{ dataset.id }}">{{ dataset.url }} ({{ dataset.pages }} pages)</option>
+                    {% endfor %}
+                </select>
+
+                
+          
+        </div>
+
+        <!-- Text Analysis Options -->
+        <div class="widget analysis-options">
+            <h3>Text Analysis Options</h3>
+            <form id="analysis-options-form" method="post" action="{% url 'perform_analysis' %}">
+                {% csrf_token %}
+                {% if task %}
+                <input type="hidden" name="task_id" value="{{ task.id }}">
+                {% endif %}
+
+                <label>
+                    <input type="checkbox" name="analysis-type" value="keyword-extraction" checked>
+                    Keyword Extraction
+                </label>
+
+                <label>
+                    <input type="checkbox" name="analysis-type" value="sentiment-analysis">
+                    Sentiment Analysis
+                </label>
+
+                <label>
+                    <input type="checkbox" name="analysis-type" value="content-categorization">
+                    Content Categorization
+                </label>
+
+                <label>
+                    <input type="checkbox" name="analysis-type" value="entity-recognition">
+                    Entity Recognition
+                </label>
+
+                <button type="submit">Start Analysis</button>
+            </form>
+        </div>
+
+        <!-- Analysis Results -->
+        {% if results %}
+        <div class="widget analysis-results">
+            <h3>Analysis Results</h3>
+            <div class="results-summary">
+                <p><strong>Summary:</strong></p>
+                <ul>
+                    <li><strong>Top Keywords:</strong> {{ results.keywords|join:", " }}</li>
+                    <li><strong>Overall Sentiment:</strong> {{ results.sentiment }}</li>
+                    <li><strong>Top Categories:</strong> {{ results.categories|join:", " }}</li>
+                    <li><strong>Named Entities:</strong> {{ results.entities|join:", " }}</li>
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
