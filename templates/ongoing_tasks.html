@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ongoing Scraping Tasks</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/scraping.css' %}">
+</head>
+
+<body>
+     {% include 'navbar.html' %}
+    <div class="main-content">
+        <h2>Ongoing Scraping Tasks</h2>
+
+        <div class="widget ongoing-tasks">
+            <h3>Ongoing Scraping Tasks</h3>
+        <ul>
+            {% for task in tasks %}
+            <li>
+                <strong>{{ task.result }}</strong> <!-- Display Task Result -->
+                <div class="progress-bar">
+                    <div class="progress" style="width: 100%;">In Progress</div>
+                </div>
+                <form action="{% url 'pause_task' task.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Pause</button>
+                </form>
+                <form action="{% url 'cancel_task' task.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Cancel</button>
+                </form>
+            </li>
+            {% empty %}
+            <li>No ongoing tasks at the moment.</li>
+            {% endfor %}
+        </ul>
+
+        </div>
+    </div>
+</body>
+
+</html>

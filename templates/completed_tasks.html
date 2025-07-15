@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completed Scraping Tasks - Web Scraping & Text Analysis System</title>
+  
+</head>
+
+<body>
+     {% include 'navbar.html' %}
+    <div class="main-content">
+        <h2>Completed Scraping Tasks</h2>
+
+        <div class="widget completed-tasks">
+            <h3>Completed Scraping Tasks</h3>
+            <ul>
+                {% for task in tasks %}
+                <li>
+                    <div>
+                        <strong>{{ task.result|slice:":-12" }}</strong> 
+                        <span>{{ task.result|slice:"12:" }}</span> 
+                    </div>
+                    <div>
+                        <form action="{% url 'view_results' task.id %}" method="get" style="display:inline;">
+                            <button type="submit">View Results</button>
+                        </form>
+                       <form action="{% url 'download_data' task.id %}" method="get" style="display:inline;">
+                            <button type="submit">Download Data</button>
+                        </form>
+                    </div>
+                </li>
+                {% empty %}
+                <li class="empty-message">No completed tasks at the moment.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

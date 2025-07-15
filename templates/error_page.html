@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Web Scraping & Text Analysis System</title>
+    <!-- Load static files -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/error.css' %}">
+</head>
+
+<body>
+    <div class="main-content">
+        <h2>Error Occurred</h2>
+
+        <!-- Error Message -->
+        <div class="widget error-message">
+            <h3>Oops! Something went wrong.</h3>
+            <p>{{ error_message }}</p> <!-- Display error message passed from the view -->
+        </div>
+
+        <!-- Retry or Go Back -->
+        <div class="widget error-actions">
+            <a href="{% url 'dashboard' %}" class="button">Go Back Home</a>
+            <a href="javascript:history.back()" class="button">Retry</a>
+        </div>
+    </div>
+</body>
+
+</html>

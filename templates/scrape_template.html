@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrape Data</title>
+    <!-- Add any additional CSS here -->
+</head>
+<body>
+    <div class="container">
+        <h1>Scrape Data</h1>
+
+        <!-- Check if there are any form errors -->
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <!-- Form starts here -->
+        <form method="post" novalidate>
+            <!-- CSRF token for security -->
+            {% csrf_token %}
+            
+            <!-- Render form fields -->
+            <div class="form-group">
+                {{ form.url.label_tag }}
+                {{ form.url }}
+                <!-- Optional: help text for the form field -->
+                {% if form.url.help_text %}
+                    <small class="form-text text-muted">{{ form.url.help_text }}</small>
+                {% endif %}
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary">Scrape</button>
+        </form>
+    </div>
+
+    <!-- Add any additional JS here -->
+</body>
+</html>

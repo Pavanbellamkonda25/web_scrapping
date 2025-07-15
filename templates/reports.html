@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Web Scraping & Text Analysis System</title>
+    <!-- Load static files -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/reports.css' %}">
+</head>
+
+<body>
+     {% include 'navbar.html' %}
+    <div class="main-content">
+        <h2>Generate Reports</h2>
+
+        <!-- Report Filters -->
+        <div class="widget report-filters">
+            <h3>Filter Criteria</h3>
+            <form id="report-filters-form" method="post">
+                {% csrf_token %}
+                <label for="date-range">Date Range:</label>
+                <input type="date" id="start-date" name="start-date">
+                <input type="date" id="end-date" name="end-date">
+
+                <label for="category-filter">Filter by Category:</label>
+                <select id="category-filter" name="category-filter">
+                    <option value="all">All Categories</option>
+                    <option value="harmful">Harmful Content</option>
+                    <option value="neutral">Neutral Content</option>
+                </select>
+
+                <label for="keyword-filter">Filter by Keyword:</label>
+                <input type="text" id="keyword-filter" name="keyword-filter" placeholder="Enter keyword">
+
+                <label for="sentiment-filter">Filter by Sentiment:</label>
+                <select id="sentiment-filter" name="sentiment-filter">
+                    <option value="all">All Sentiments</option>
+                    <option value="positive">Positive</option>
+                    <option value="negative">Negative</option>
+                    <option value="neutral">Neutral</option>
+                </select>
+
+                <label for="report-format">Report Format:</label>
+                <select id="report-format" name="report-format">
+                    <option value="pdf">PDF</option>
+                    <option value="excel">Excel</option>
+                </select>
+
+                <button type="submit">Generate Report</button>
+            </form>
+        </div>
+
+        <!-- Saved Reports -->
+        <div class="widget saved-reports">
+            <h3>Saved Reports</h3>
+            <ul id="saved-reports-list">
+                {% for report in saved_reports %}
+                <li>
+                    <span>{{ report.title }} - {{ report.generated_at|date:"Y-m-d H:i" }}</span>
+                    <form method="get" action="{{ report.file_url }}" style="display:inline;">
+                        <button type="submit">Download</button>
+                    </form>
+                    <form method="post" action="{% url 'delete_report' report.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                    </form>
+                </li>
+                {% empty %}
+                <li>No saved reports available.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
